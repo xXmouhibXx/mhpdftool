@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scanned Arabic PDF to Word – free OCR for Arabic and French, no upload</title>
+<meta name="description" content="Convert a scanned PDF or a photo of a document into editable Word text. Reads Arabic, French and English. Works in your browser; the file is never uploaded.">
+<link rel="alternate" hreflang="en" href="scanned-pdf-to-word.html">
+<link rel="alternate" hreflang="fr" href="scanned-pdf-to-word-fr.html">
+<link rel="alternate" hreflang="ar" href="scanned-pdf-to-word-ar.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="brand" href="index.html">M.HPDFTOOL</a>
+  <nav>
+    <a href="index.html">All tools</a>
+    <a href="scanned-pdf-to-word-fr.html" lang="fr">Français</a>
+    <a href="scanned-pdf-to-word-ar.html" lang="ar">العربية</a>
+  </nav>
+</header>
+<main>
+  <h1>Scanned PDF to Word, for Arabic and French</h1>
+  <p class="lead">Turn a scanned PDF or a photo of a page into text you can edit, then save it as a Word file. Your document stays on your device.</p>
+
+  <div class="card">
+    <div class="row">
+      <label for="lang">Language of the document</label>
+      <select id="lang">
+        <option value="ara">Arabic</option>
+        <option value="fra">French</option>
+        <option value="eng">English</option>
+        <option value="ara+fra">Arabic + French</option>
+      </select>
+    </div>
+    <label class="drop" id="drop">
+      <input type="file" id="file" accept="application/pdf,image/jpeg,image/png,image/webp" multiple>
+      Click to choose a scanned PDF or photos, or drop them here
+    </label>
+    <p id="status" aria-live="polite"></p>
+    <label for="text" class="note">Recognised text (you can correct it here)</label>
+    <textarea id="text"></textarea>
+    <div class="row">
+      <button id="save" disabled>Download Word file</button>
+      <button id="copy" class="chip" disabled>Copy text</button>
+    </div>
+    <p class="note">The first use downloads the reading engine (about 6 MB), so it takes longer. Handwriting is not supported.</p>
+  </div>
+
+  <!-- AD SLOT: paste your AdSense ad unit code here after approval -->
+  <div class="ad-slot"></div>
+
+  <h2>How to convert a scanned Arabic PDF to Word</h2>
+  <ol>
+    <li>Choose the language of the document. Pick Arabic + French for mixed pages.</li>
+    <li>Choose the scanned PDF, or one or more photos of the pages.</li>
+    <li>Wait while each page is read. The text appears in the box.</li>
+    <li>Correct any mistakes in the box, then click Download Word file.</li>
+  </ol>
+
+  <h2>What is a scanned PDF?</h2>
+  <p>A scanned PDF is a picture of a page. You cannot select or copy its text, and Word cannot edit it. This tool reads the letters in the picture (a method called OCR) and gives you real text.</p>
+  <h2>How accurate is it?</h2>
+  <p>Clean printed pages give good results. Arabic is harder for a computer to read than French or English, so expect some wrong letters, especially with small print, decorative fonts, vowel marks or a blurry photo. Always reread the text before you use it.</p>
+  <h2>Tips for a better result</h2>
+  <p>Scan or photograph the page straight, in good light, with the text sharp. Crop out stamps and margins if you can. Choose the right language: reading Arabic text with the French setting gives nonsense.</p>
+  <h2>What is kept in the Word file?</h2>
+  <p>The text and its paragraphs, with Arabic set right-to-left. Tables, images and the original layout are not kept. Documents longer than 30 pages are cut at 30 pages.</p>
+  <h2>Is it safe?</h2>
+  <p>Yes. The reading happens inside your browser. Your document is not sent to any server.</p>
+</main>
+<footer>
+  <p>© M.HPDFTOOL · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy policy</a></p>
+</footer>
+
+<script src="vendor/pdf.min.js"></script>
+<script src="vendor/tesseract/tesseract.min.js"></script>
+<script src="vendor/docx.iife.js"></script>
+<script src="js/ocr-to-word.js"></script>
+<script>OcrToWord.init({"badType": "Please choose a PDF or an image.", "loading": "Loading the reading engine…", "reading": "Reading page {n} of {total}… {pct}%", "done": "Done: {pages} page(s) read. Check the text, then download.", "limit": "Only the first {max} pages were read.", "noText": "No text was found. Check the language, or try a sharper scan.", "password": "This PDF is password-protected and cannot be read.", "failed": "Sorry, this file could not be read.", "copied": "Copied.", "copyFailed": "Copy failed: select the text by hand."});</script>
+</body>
+</html>

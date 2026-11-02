@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compress image to 50 KB, 100 KB or 200 KB – free, no upload</title>
+<meta name="description" content="Reduce a photo to an exact size in KB for visa, job and university forms. Free, works in your browser, and your image is never uploaded.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="brand" href="index.html">M.HPDFTOOL</a>
+  <nav>
+    <a href="index.html">All tools</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+<main>
+  <h1>Compress an image to an exact size in KB</h1>
+  <p class="lead">Shrink a photo under the limit an online form asks for. Your image stays on your device.</p>
+
+  <div class="card">
+    <label class="drop" id="drop">
+      <input type="file" id="file" accept="image/jpeg,image/png,image/webp">
+      Click to choose an image, or drop it here
+    </label>
+    <div class="row">
+      <label for="target">Maximum size (KB)</label>
+      <input type="number" id="target" value="100" min="5" max="5000">
+      <button id="go" disabled>Compress</button>
+    </div>
+    <p id="status"></p>
+    <div id="results"></div>
+  </div>
+
+  <!-- AD SLOT: paste your AdSense ad unit code here after approval -->
+  <div class="ad-slot"></div>
+
+  <h2>How to compress a photo to a size in KB</h2>
+  <ol>
+    <li>Choose your image or drop it into the box above.</li>
+    <li>Type the maximum size the form allows, for example 50, 100 or 200 KB.</li>
+    <li>Click Compress, then download the result. It is saved as a JPG.</li>
+  </ol>
+
+  <h2>How does it work?</h2>
+  <p>The tool first lowers the JPG quality until the file fits. If that is not enough, it also makes the image slightly smaller in width and height, and tries again until the file is under your limit.</p>
+
+  <h2>Is it safe?</h2>
+  <p>Yes. The compression happens inside your browser. Your photo is not sent to any server, which matters for ID and passport photos.</p>
+</main>
+<footer>
+  <p>© M.HPDFTOOL · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy policy</a></p>
+</footer>
+
+<script>
+const drop = document.getElementById('drop');
+const input = document.getElementById('file');
+const statusEl = document.getElementById('status');
+const results = document.getElementById('results');
+const goBtn = document.getElementById('go');
+let current = null; // { img, name, size }
+
+input.addEventListener('change', () => { if (input.files[0]) setFile(input.files[0]); });
+drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('over'); });
+drop.addEventListener('dragleave', () => drop.classList.remove('over'));
+drop.addEventListener('drop', e => {
+  e.preventDefault();
+  drop.classList.remove('over');
+  if (e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]);
+});
+goBtn.addEventListener('click', compress);
+
+function kb(bytes) { return (bytes / 1024).toFixed(1) + ' KB'; }
+
+function setFile(file) {
+  results.innerHTML = '';
+  if (!file.type.startsWith('image/')) {
+    statusEl.textContent = 'Please choose an image file.';
+    return;
+  }
+  const img = new Image();
+  img.onload = () => {
+    current = { img, name: file.name, size: file.size };
+    goBtn.disabled = false;
+    statusEl.textContent = file.name + ' · ' + kb(file.size) + ' · ' + img.naturalWidth + '×' + img.naturalHeight;
+  };
+  img.onerror = () => { statusEl.textContent = 'Sorry, this image could not be read.'; };
+  img.src = URL.createObjectURL(file);
+}
+
+function encode(img, scale, quality) {
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.max(1, Math.round(img.naturalWidth * scale));
+  canvas.height = Math.max(1, Math.round(img.naturalHeight * scale));
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  return new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', quality))
+    .then(blob => ({ blob, width: canvas.width, height: canvas.height }));
+}
+
+async function compress() {
+  if (!current) return;
+  const targetKb = parseFloat(document.getElementById('target').value);
+  if (!targetKb || targetKb < 5) {
+    statusEl.textContent = 'Enter a size of at least 5 KB.';
+    return;
+  }
+  const target = targetKb * 1024;
+  goBtn.disabled = true;
+  results.innerHTML = '';
+  statusEl.textContent = 'Compressing…';
+
+  let best = null;
+  let scale = 1;
+  // Start smaller for very large photos so the search is faster
+  const longest = Math.max(current.img.naturalWidth, current.img.naturalHeight);
+  if (longest > 4000) scale = 4000 / longest;
+
+  for (let attempt = 0; attempt < 25 && !best; attempt++) {
+    // Binary search the highest quality that fits at this scale
+    let lo = 0.3, hi = 0.95;
+    for (let i = 0; i < 7; i++) {
+      const q = (lo + hi) / 2;
+      const out = await encode(current.img, scale, q);
+      if (out.blob.size <= target) { best = out; lo = q; } else { hi = q; }
+    }
+    if (!best) scale *= 0.85; // still too big at low quality: shrink dimensions
+  }
+
+  goBtn.disabled = false;
+  if (!best) {
+    statusEl.textContent = 'This image cannot be made that small. Try a larger size.';
+    return;
+  }
+  const url = URL.createObjectURL(best.blob);
+  const fig = document.createElement('figure');
+  const img = document.createElement('img');
+  img.src = url;
+  img.alt = 'Compressed image';
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = current.name.replace(/\.[^.]+$/, '') + '-' + Math.round(targetKb) + 'kb.jpg';
+  link.textContent = 'Download';
+  fig.appendChild(img);
+  fig.appendChild(link);
+  results.appendChild(fig);
+  statusEl.textContent = 'Done: ' + kb(current.size) + ' → ' + kb(best.blob.size) +
+    ' (' + best.width + '×' + best.height + ')';
+}
+</script>
+</body>
+</html>

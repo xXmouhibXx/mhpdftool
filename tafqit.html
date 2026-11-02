@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تفقيط المبلغ بالدينار التونسي – كتابة المبلغ بالحروف للشيك والفاتورة</title>
+<meta name="description" content="حوّل المبلغ من أرقام إلى حروف بالدينار التونسي والمليم لكتابة شيك أو فاتورة. مجاني وفوري.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="brand" href="index.html">M.HPDFTOOL</a>
+  <nav>
+    <a href="index.html">كل الأدوات</a>
+    <a href="montant-en-lettres.html" lang="fr">Français</a>
+    <a href="contact.html">اتصل بنا</a>
+  </nav>
+</header>
+<main>
+  <h1>تفقيط المبلغ بالدينار التونسي</h1>
+  <p class="lead">اكتب المبلغ بالأرقام ليظهر مكتوباً بالحروف، بالدينار والمليم، جاهزاً للنسخ على الشيك أو الفاتورة.</p>
+
+  <div class="card">
+    <div class="row">
+      <label for="amount">المبلغ (د.ت)</label>
+      <input type="text" id="amount" inputmode="decimal" placeholder="1250,750" autocomplete="off" dir="ltr">
+    </div>
+    <div class="output" id="out" aria-live="polite"></div>
+    <div class="row">
+      <button id="copy" disabled>نسخ</button>
+      <span id="status"></span>
+    </div>
+  </div>
+
+  <!-- AD SLOT: paste your AdSense ad unit code here after approval -->
+  <div class="ad-slot"></div>
+
+  <h2>كيف تكتب المبلغ بالحروف على الشيك</h2>
+  <ol>
+    <li>اكتب المبلغ بالأرقام. استعمل الفاصلة أو النقطة للمليمات، مثلاً 1250,750.</li>
+    <li>يظهر المبلغ بالحروف مباشرة.</li>
+    <li>اضغط على «نسخ» أو انقل النص بخط يدك على الشيك.</li>
+  </ol>
+
+  <h2>الدينار والمليم</h2>
+  <p>الدينار التونسي يساوي 1000 مليم، لذلك يُكتب المبلغ بثلاثة أرقام بعد الفاصلة: 12,500 د.ت تُقرأ «اثنا عشر ديناراً وخمسمئة مليم». وإذا كتبت 12,5 فالأداة تفهمها 12,500.</p>
+
+  <h2>قواعد كتابة العدد المطبّقة</h2>
+  <div class="table-wrap">
+  <table>
+    <tr><th>القاعدة</th><th>مثال</th></tr>
+    <tr><td>من 3 إلى 10: المعدود جمع</td><td>خمسة دنانير</td></tr>
+    <tr><td>من 11 إلى 99: المعدود مفرد منصوب</td><td>خمسة وعشرون ديناراً</td></tr>
+    <tr><td>المئة والألف والمليون: المعدود مفرد</td><td>مئة دينار، ألف دينار</td></tr>
+    <tr><td>المثنى تُحذف نونه قبل المعدود</td><td>مئتا دينار، ألفا دينار</td></tr>
+  </table>
+  </div>
+
+  <h2>أمثلة</h2>
+  <div class="table-wrap">
+  <table>
+    <tr><th>بالأرقام</th><th>بالحروف</th></tr>
+    <tr><td dir="ltr">80,000</td><td>ثمانون ديناراً</td></tr>
+    <tr><td dir="ltr">350,500</td><td>ثلاثمئة وخمسون ديناراً وخمسمئة مليم</td></tr>
+    <tr><td dir="ltr">1250,750</td><td>ألف ومئتان وخمسون ديناراً وسبعمئة وخمسون مليماً</td></tr>
+    <tr><td dir="ltr">2000,000</td><td>ألفا دينار</td></tr>
+  </table>
+  </div>
+</main>
+<footer>
+  <p>© M.HPDFTOOL · <a href="about.html">من نحن</a> · <a href="contact.html">اتصل بنا</a> · <a href="privacy.html">سياسة الخصوصية</a></p>
+</footer>
+
+<script src="js/ar-words.js"></script>
+<script src="js/amount-tool.js"></script>
+<script>
+AmountTool.init({
+  convert: ArWords.amountToArabic,
+  capitalize: false,
+  messages: {
+    invalid: 'اكتب مبلغاً صحيحاً، مثلاً 1250,750.',
+    decimals: 'ثلاثة أرقام على الأكثر بعد الفاصلة (المليمات).',
+    tooBig: 'أقصى مبلغ هو 999 999 999,999.',
+    copied: 'تم النسخ.',
+    copyFailed: 'تعذّر النسخ: حدّد النص يدوياً.'
+  }
+});
+</script>
+</body>
+</html>

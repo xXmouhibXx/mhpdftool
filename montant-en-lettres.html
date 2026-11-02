@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Montant en lettres en dinars tunisiens – chèque et facture</title>
+<meta name="description" content="Convertissez un montant en chiffres en toutes lettres, en dinars et millimes, pour remplir un chèque ou une facture en Tunisie. Gratuit et instantané.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="brand" href="index.html">M.HPDFTOOL</a>
+  <nav>
+    <a href="index.html">Tous les outils</a>
+    <a href="tafqit.html" lang="ar">العربية</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+<main>
+  <h1>Montant en lettres en dinars tunisiens</h1>
+  <p class="lead">Tapez un montant en chiffres : il est écrit en toutes lettres, en dinars et millimes, prêt à copier sur un chèque ou une facture.</p>
+
+  <div class="card">
+    <div class="row">
+      <label for="amount">Montant (DT)</label>
+      <input type="text" id="amount" inputmode="decimal" placeholder="1250,750" autocomplete="off">
+    </div>
+    <div class="output" id="out" aria-live="polite"></div>
+    <div class="row">
+      <button id="copy" disabled>Copier</button>
+      <span id="status"></span>
+    </div>
+  </div>
+
+  <!-- AD SLOT: paste your AdSense ad unit code here after approval -->
+  <div class="ad-slot"></div>
+
+  <h2>Comment écrire un montant en lettres sur un chèque</h2>
+  <ol>
+    <li>Tapez le montant en chiffres. Utilisez la virgule ou le point pour les millimes, par exemple 1250,750.</li>
+    <li>Le montant en lettres s'affiche tout de suite.</li>
+    <li>Cliquez sur Copier, ou recopiez le texte à la main sur le chèque.</li>
+  </ol>
+
+  <h2>Dinars et millimes</h2>
+  <p>Un dinar tunisien vaut 1000 millimes. Le montant s'écrit donc avec trois chiffres après la virgule : 12,500 DT se lit « douze dinars et cinq cents millimes ». Si vous tapez 12,5, l'outil comprend 12,500.</p>
+
+  <h2>Les règles d'orthographe appliquées</h2>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Règle</th><th>Exemple</th></tr>
+    <tr><td>« vingt » et « cent » prennent un s quand ils sont multipliés et terminent le nombre</td><td>quatre-vingts, deux cents, mais deux cent un</td></tr>
+    <tr><td>« mille » ne prend jamais de s</td><td>trois mille</td></tr>
+    <tr><td>« et » devant un pour 21, 31, 41, 51, 61, et pour 71</td><td>vingt et un, soixante et onze</td></tr>
+    <tr><td>Pas de « et » pour 81 et 91</td><td>quatre-vingt-un, quatre-vingt-onze</td></tr>
+    <tr><td>« de » après un nombre rond de millions</td><td>deux millions de dinars</td></tr>
+  </table>
+  </div>
+
+  <h2>Exemples</h2>
+  <div class="table-wrap">
+  <table>
+    <tr><th>En chiffres</th><th>En lettres</th></tr>
+    <tr><td>80,000</td><td>quatre-vingts dinars</td></tr>
+    <tr><td>350,500</td><td>trois cent cinquante dinars et cinq cents millimes</td></tr>
+    <tr><td>1 250,750</td><td>mille deux cent cinquante dinars et sept cent cinquante millimes</td></tr>
+    <tr><td>21 000,000</td><td>vingt et un mille dinars</td></tr>
+  </table>
+  </div>
+</main>
+<footer>
+  <p>© M.HPDFTOOL · <a href="about.html">À propos</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Confidentialité</a></p>
+</footer>
+
+<script src="js/fr-words.js"></script>
+<script src="js/amount-tool.js"></script>
+<script>
+AmountTool.init({
+  convert: FrWords.amountToFrench,
+  capitalize: true,
+  messages: {
+    invalid: 'Tapez un montant valide, par exemple 1250,750.',
+    decimals: 'Trois chiffres au maximum après la virgule (millimes).',
+    tooBig: 'Le montant maximum est 999 999 999,999.',
+    copied: 'Copié.',
+    copyFailed: 'Copie impossible : sélectionnez le texte à la main.'
+  }
+});
+</script>
+</body>
+</html>

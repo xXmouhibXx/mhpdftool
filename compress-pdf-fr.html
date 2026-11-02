@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compresser un PDF à 200 Ko, 100 Ko ou la taille voulue – gratuit, sans envoi</title>
+<meta name="description" content="Réduisez un PDF sous la limite d'un formulaire de visa, d'inscription ou de candidature : 200 Ko, 100 Ko, 500 Ko ou la taille de votre choix. Le fichier reste sur votre appareil.">
+<link rel="alternate" hreflang="en" href="compress-pdf.html">
+<link rel="alternate" hreflang="fr" href="compress-pdf-fr.html">
+<link rel="alternate" hreflang="ar" href="compress-pdf-ar.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="brand" href="index.html">M.HPDFTOOL</a>
+  <nav>
+    <a href="index.html">Tous les outils</a>
+    <a href="compress-pdf.html" lang="en">English</a>
+    <a href="compress-pdf-ar.html" lang="ar">العربية</a>
+  </nav>
+</header>
+<main>
+  <h1>Compresser un PDF sous une taille en Ko</h1>
+  <p class="lead">Réduisez un PDF sous la limite demandée par un formulaire en ligne. Votre fichier reste sur votre appareil.</p>
+
+  <div class="card">
+    <label class="drop" id="drop">
+      <input type="file" id="file" accept="application/pdf">
+      Cliquez pour choisir un PDF, ou déposez-le ici
+    </label>
+    <div class="row">
+      <label for="target">Taille maximale (Ko)</label>
+      <input type="number" id="target" value="200" min="20" max="20000" dir="ltr">
+      <button type="button" class="chip" data-kb="100">100</button>
+      <button type="button" class="chip" data-kb="200">200</button>
+      <button type="button" class="chip" data-kb="500">500</button>
+    </div>
+    <div class="row"><button id="go" disabled>Compresser</button></div>
+    <p id="status" aria-live="polite"></p>
+    <div id="results" style="display:block"></div>
+    <p class="note">Les pages sont enregistrées comme des images : le texte du résultat ne peut plus être sélectionné ni recherché. Cela convient aux scans, attestations et formulaires.</p>
+  </div>
+
+  <!-- AD SLOT: paste your AdSense ad unit code here after approval -->
+  <div class="ad-slot"></div>
+
+  <h2>Comment compresser un PDF à 200 Ko</h2>
+  <ol>
+    <li>Choisissez votre PDF ou déposez-le dans la zone ci-dessus.</li>
+    <li>Tapez la taille maximale acceptée par le formulaire, ou touchez 100, 200 ou 500 Ko.</li>
+    <li>Cliquez sur Compresser et attendez le traitement des pages.</li>
+    <li>Téléchargez le PDF réduit et vérifiez qu'il reste lisible avant de l'envoyer.</li>
+  </ol>
+
+  <h2>Pourquoi les formulaires demandent de petits PDF</h2>
+  <p>Les portails de visa, les sites d'inscription universitaire et les formulaires de candidature refusent souvent les fichiers de plus de 200 Ko ou 500 Ko. Un scan fait au téléphone pèse en général plusieurs mégaoctets : il faut donc le réduire.</p>
+  <h2>Comment l'outil atteint la taille</h2>
+  <p>Il redessine chaque page en image JPEG et essaie plusieurs niveaux de netteté. Il garde la version la plus nette qui passe sous votre limite, pour un résultat aussi lisible que la taille le permet.</p>
+  <h2>Et si le résultat est difficile à lire ?</h2>
+  <p>Un long document ne tient pas toujours dans une très petite taille. Essayez une limite plus grande si le formulaire l'accepte, ou envoyez seulement les pages demandées.</p>
+  <h2>Est-ce sûr ?</h2>
+  <p>Oui. La compression se fait dans votre navigateur. Votre passeport, votre diplôme ou votre relevé bancaire n'est envoyé à aucun serveur.</p>
+</main>
+<footer>
+  <p>© M.HPDFTOOL · <a href="about.html">À propos</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Confidentialité</a></p>
+</footer>
+
+<script src="vendor/pdf.min.js"></script>
+<script src="vendor/jspdf.umd.min.js"></script>
+<script src="js/compress-pdf.js"></script>
+<script>CompressPdf.init({"unit": "Ko", "notPdf": "Veuillez choisir un fichier PDF.", "minSize": "Entrez une taille d'au moins 20 Ko.", "alreadySmall": "Ce PDF fait déjà {size}, sous votre limite. Rien à faire.", "analysing": "Analyse de la page {n} sur {total}…", "building": "Création du PDF : page {n} sur {total}…", "download": "Télécharger le PDF compressé", "done": "Terminé : {from} → {to} ({pages} page(s)).", "tooSmall": "Ce PDF ne peut pas être réduit à cette taille. Le minimum possible est d'environ {size}.", "password": "Ce PDF est protégé par un mot de passe et ne peut pas être compressé.", "unreadable": "Désolé, ce fichier n'a pas pu être lu comme un PDF."});</script>
+</body>
+</html>

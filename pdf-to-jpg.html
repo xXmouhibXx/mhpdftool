@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PDF to JPG – Convert PDF pages to images free, no upload</title>
+<meta name="description" content="Convert each page of a PDF to a JPG image for free. Works in your browser, so your file is never uploaded.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="brand" href="index.html">M.HPDFTOOL</a>
+  <nav>
+    <a href="index.html">All tools</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+<main>
+  <h1>PDF to JPG converter</h1>
+  <p class="lead">Turn every page of a PDF into a JPG image. Your file stays on your device.</p>
+
+  <div class="card">
+    <label class="drop" id="drop">
+      <input type="file" id="file" accept="application/pdf">
+      Click to choose a PDF, or drop it here
+    </label>
+    <div class="row">
+      <label for="quality">Image quality</label>
+      <select id="quality">
+        <option value="1.5">Normal</option>
+        <option value="2" selected>High</option>
+        <option value="3">Very high</option>
+      </select>
+    </div>
+    <p id="status"></p>
+    <div id="results"></div>
+  </div>
+
+  <!-- AD SLOT: paste your AdSense ad unit code here after approval -->
+  <div class="ad-slot"></div>
+
+  <h2>How to convert a PDF to JPG</h2>
+  <ol>
+    <li>Choose your PDF file or drop it into the box above.</li>
+    <li>Pick the image quality. High is right for most uses; Very high makes larger files.</li>
+    <li>Wait a moment while each page is converted.</li>
+    <li>Click Download under each page to save it as a JPG.</li>
+  </ol>
+
+  <h2>Is it safe?</h2>
+  <p>Yes. The conversion happens inside your browser. The PDF is not sent to any server, so nobody else can see it.</p>
+
+  <h2>Why convert a PDF to JPG?</h2>
+  <p>Many websites and apps accept only images. Converting a PDF page to a JPG lets you upload a scanned document to a form, share a page on social media, or insert it into a presentation.</p>
+</main>
+<footer>
+  <p>© M.HPDFTOOL · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy policy</a></p>
+</footer>
+
+<script src="vendor/pdf.min.js"></script>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  'vendor/pdf.worker.min.js';
+
+const drop = document.getElementById('drop');
+const input = document.getElementById('file');
+const statusEl = document.getElementById('status');
+const results = document.getElementById('results');
+
+input.addEventListener('change', () => { if (input.files[0]) convert(input.files[0]); });
+drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('over'); });
+drop.addEventListener('dragleave', () => drop.classList.remove('over'));
+drop.addEventListener('drop', e => {
+  e.preventDefault();
+  drop.classList.remove('over');
+  if (e.dataTransfer.files[0]) convert(e.dataTransfer.files[0]);
+});
+
+async function convert(file) {
+  results.innerHTML = '';
+  if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+    statusEl.textContent = 'Please choose a PDF file.';
+    return;
+  }
+  const scale = parseFloat(document.getElementById('quality').value);
+  const baseName = file.name.replace(/\.pdf$/i, '');
+  try {
+    statusEl.textContent = 'Opening PDF…';
+    const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+    for (let i = 1; i <= pdf.numPages; i++) {
+      statusEl.textContent = 'Converting page ' + i + ' of ' + pdf.numPages + '…';
+      const page = await pdf.getPage(i);
+      const viewport = page.getViewport({ scale });
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.floor(viewport.width);
+      canvas.height = Math.floor(viewport.height);
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      await page.render({ canvasContext: ctx, viewport }).promise;
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.92));
+      const url = URL.createObjectURL(blob);
+
+      const fig = document.createElement('figure');
+      const img = document.createElement('img');
+      img.src = url;
+      img.alt = 'Page ' + i;
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = baseName + '-page-' + i + '.jpg';
+      link.textContent = 'Download page ' + i;
+      fig.appendChild(img);
+      fig.appendChild(link);
+      results.appendChild(fig);
+    }
+    statusEl.textContent = 'Done. ' + pdf.numPages + ' page(s) converted.';
+  } catch (err) {
+    statusEl.textContent = err && err.name === 'PasswordException'
+      ? 'This PDF is password-protected and cannot be converted.'
+      : 'Sorry, this file could not be read as a PDF.';
+  }
+}
+</script>
+</body>
+</html>

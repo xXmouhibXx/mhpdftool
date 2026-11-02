@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PDF scanné en Word – OCR gratuit pour l'arabe et le français, sans envoi</title>
+<meta name="description" content="Convertissez un PDF scanné ou la photo d'un document en texte Word modifiable. Lit l'arabe, le français et l'anglais. Le fichier reste sur votre appareil.">
+<link rel="alternate" hreflang="en" href="scanned-pdf-to-word.html">
+<link rel="alternate" hreflang="fr" href="scanned-pdf-to-word-fr.html">
+<link rel="alternate" hreflang="ar" href="scanned-pdf-to-word-ar.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="brand" href="index.html">M.HPDFTOOL</a>
+  <nav>
+    <a href="index.html">Tous les outils</a>
+    <a href="scanned-pdf-to-word.html" lang="en">English</a>
+    <a href="scanned-pdf-to-word-ar.html" lang="ar">العربية</a>
+  </nav>
+</header>
+<main>
+  <h1>PDF scanné en Word, pour l'arabe et le français</h1>
+  <p class="lead">Transformez un PDF scanné ou la photo d'une page en texte modifiable, puis enregistrez-le en fichier Word. Votre document reste sur votre appareil.</p>
+
+  <div class="card">
+    <div class="row">
+      <label for="lang">Langue du document</label>
+      <select id="lang">
+        <option value="fra">Français</option>
+        <option value="ara">Arabe</option>
+        <option value="eng">Anglais</option>
+        <option value="ara+fra">Arabe + français</option>
+      </select>
+    </div>
+    <label class="drop" id="drop">
+      <input type="file" id="file" accept="application/pdf,image/jpeg,image/png,image/webp" multiple>
+      Cliquez pour choisir un PDF scanné ou des photos, ou déposez-les ici
+    </label>
+    <p id="status" aria-live="polite"></p>
+    <label for="text" class="note">Texte reconnu (vous pouvez le corriger ici)</label>
+    <textarea id="text"></textarea>
+    <div class="row">
+      <button id="save" disabled>Télécharger le fichier Word</button>
+      <button id="copy" class="chip" disabled>Copier le texte</button>
+    </div>
+    <p class="note">La première utilisation télécharge le moteur de lecture (environ 6 Mo) : elle est donc plus longue. L'écriture manuscrite n'est pas prise en charge.</p>
+  </div>
+
+  <!-- AD SLOT: paste your AdSense ad unit code here after approval -->
+  <div class="ad-slot"></div>
+
+  <h2>Comment convertir un PDF scanné en Word</h2>
+  <ol>
+    <li>Choisissez la langue du document. Prenez Arabe + français pour les pages mixtes.</li>
+    <li>Choisissez le PDF scanné, ou une ou plusieurs photos des pages.</li>
+    <li>Attendez la lecture de chaque page. Le texte apparaît dans la zone.</li>
+    <li>Corrigez les erreurs dans la zone, puis cliquez sur Télécharger le fichier Word.</li>
+  </ol>
+
+  <h2>Qu'est-ce qu'un PDF scanné ?</h2>
+  <p>Un PDF scanné est l'image d'une page. On ne peut ni sélectionner ni copier son texte, et Word ne peut pas le modifier. Cet outil lit les lettres dans l'image (méthode appelée OCR) et vous donne un vrai texte.</p>
+  <h2>Quelle est la précision ?</h2>
+  <p>Les pages imprimées et nettes donnent de bons résultats. L'arabe est plus difficile à lire pour un ordinateur que le français : attendez-vous à quelques lettres fausses, surtout avec de petits caractères, des polices décoratives, des voyelles ou une photo floue. Relisez toujours le texte avant de l'utiliser.</p>
+  <h2>Conseils pour un meilleur résultat</h2>
+  <p>Scannez ou photographiez la page bien droite, avec une bonne lumière et un texte net. Coupez les tampons et les marges si possible. Choisissez la bonne langue : lire un texte arabe avec le réglage français donne un résultat illisible.</p>
+  <h2>Que garde le fichier Word ?</h2>
+  <p>Le texte et ses paragraphes, avec l'arabe de droite à gauche. Les tableaux, les images et la mise en page d'origine ne sont pas conservés. Les documents de plus de 30 pages sont coupés à 30 pages.</p>
+  <h2>Est-ce sûr ?</h2>
+  <p>Oui. La lecture se fait dans votre navigateur. Votre document n'est envoyé à aucun serveur.</p>
+</main>
+<footer>
+  <p>© M.HPDFTOOL · <a href="about.html">À propos</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Confidentialité</a></p>
+</footer>
+
+<script src="vendor/pdf.min.js"></script>
+<script src="vendor/tesseract/tesseract.min.js"></script>
+<script src="vendor/docx.iife.js"></script>
+<script src="js/ocr-to-word.js"></script>
+<script>OcrToWord.init({"badType": "Veuillez choisir un PDF ou une image.", "loading": "Chargement du moteur de lecture…", "reading": "Lecture de la page {n} sur {total}… {pct} %", "done": "Terminé : {pages} page(s) lue(s). Vérifiez le texte, puis téléchargez.", "limit": "Seules les {max} premières pages ont été lues.", "noText": "Aucun texte trouvé. Vérifiez la langue ou essayez un scan plus net.", "password": "Ce PDF est protégé par un mot de passe et ne peut pas être lu.", "failed": "Désolé, ce fichier n'a pas pu être lu.", "copied": "Copié.", "copyFailed": "Copie impossible : sélectionnez le texte à la main."});</script>
+</body>
+</html>

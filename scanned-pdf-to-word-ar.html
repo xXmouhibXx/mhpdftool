@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تحويل PDF ممسوح ضوئياً إلى Word – قراءة النص العربي والفرنسي مجاناً ودون رفع</title>
+<meta name="description" content="حوّل ملف PDF ممسوحاً ضوئياً أو صورة وثيقة إلى نص Word قابل للتعديل. يقرأ العربية والفرنسية والإنجليزية. الملف يبقى على جهازك.">
+<link rel="alternate" hreflang="en" href="scanned-pdf-to-word.html">
+<link rel="alternate" hreflang="fr" href="scanned-pdf-to-word-fr.html">
+<link rel="alternate" hreflang="ar" href="scanned-pdf-to-word-ar.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="brand" href="index.html">M.HPDFTOOL</a>
+  <nav>
+    <a href="index.html">كل الأدوات</a>
+    <a href="scanned-pdf-to-word.html" lang="en">English</a>
+    <a href="scanned-pdf-to-word-fr.html" lang="fr">Français</a>
+  </nav>
+</header>
+<main>
+  <h1>تحويل PDF ممسوح ضوئياً إلى Word بالعربية والفرنسية</h1>
+  <p class="lead">حوّل ملف PDF ممسوحاً أو صورة صفحة إلى نص يمكنك تعديله، ثم احفظه كملف Word. وثيقتك تبقى على جهازك.</p>
+
+  <div class="card">
+    <div class="row">
+      <label for="lang">لغة الوثيقة</label>
+      <select id="lang">
+        <option value="ara">العربية</option>
+        <option value="fra">الفرنسية</option>
+        <option value="eng">الإنجليزية</option>
+        <option value="ara+fra">العربية + الفرنسية</option>
+      </select>
+    </div>
+    <label class="drop" id="drop">
+      <input type="file" id="file" accept="application/pdf,image/jpeg,image/png,image/webp" multiple>
+      اضغط لاختيار ملف PDF ممسوح أو صور، أو اسحبها إلى هنا
+    </label>
+    <p id="status" aria-live="polite"></p>
+    <label for="text" class="note">النص المستخرج (يمكنك تصحيحه هنا)</label>
+    <textarea id="text"></textarea>
+    <div class="row">
+      <button id="save" disabled>تنزيل ملف Word</button>
+      <button id="copy" class="chip" disabled>نسخ النص</button>
+    </div>
+    <p class="note">في أول استعمال يُحمَّل محرّك القراءة (حوالي 6 ميغابايت) فيستغرق وقتاً أطول. الكتابة بخط اليد غير مدعومة.</p>
+  </div>
+
+  <!-- AD SLOT: paste your AdSense ad unit code here after approval -->
+  <div class="ad-slot"></div>
+
+  <h2>كيف تحوّل ملف PDF عربياً ممسوحاً إلى Word</h2>
+  <ol>
+    <li>اختر لغة الوثيقة. اختر «العربية + الفرنسية» للصفحات المختلطة.</li>
+    <li>اختر ملف PDF الممسوح، أو صورة أو عدة صور للصفحات.</li>
+    <li>انتظر قراءة كل صفحة. يظهر النص في المربع.</li>
+    <li>صحّح الأخطاء في المربع ثم اضغط على «تنزيل ملف Word».</li>
+  </ol>
+
+  <h2>ما هو ملف PDF الممسوح ضوئياً؟</h2>
+  <p>هو صورة لصفحة، لا يمكن تحديد نصها أو نسخه، ولا يستطيع Word تعديلها. هذه الأداة تقرأ الحروف في الصورة (تقنية تسمى OCR) وتعطيك نصاً حقيقياً.</p>
+  <h2>ما مدى دقة النتيجة؟</h2>
+  <p>الصفحات المطبوعة الواضحة تعطي نتائج جيدة. قراءة العربية أصعب على الحاسوب من الفرنسية، فتوقّع بعض الحروف الخاطئة، خصوصاً مع الخط الصغير أو الخطوط المزخرفة أو التشكيل أو الصورة غير الواضحة. راجع النص دائماً قبل استعماله.</p>
+  <h2>نصائح لنتيجة أفضل</h2>
+  <p>امسح الصفحة أو صوّرها بشكل مستقيم وفي إضاءة جيدة وبنص واضح. اقطع الأختام والهوامش إن أمكن. واختر اللغة الصحيحة: قراءة نص عربي بإعداد الفرنسية تعطي نتيجة غير مفهومة.</p>
+  <h2>ماذا يُحفظ في ملف Word؟</h2>
+  <p>النص وفقراته، مع ضبط العربية من اليمين إلى اليسار. الجداول والصور والتنسيق الأصلي لا تُحفظ. الوثائق التي تتجاوز 30 صفحة تُقرأ منها أول 30 صفحة فقط.</p>
+  <h2>هل الأداة آمنة؟</h2>
+  <p>نعم. القراءة تتم داخل متصفحك. وثيقتك لا تُرسل إلى أي خادم.</p>
+</main>
+<footer>
+  <p>© M.HPDFTOOL · <a href="about.html">من نحن</a> · <a href="contact.html">اتصل بنا</a> · <a href="privacy.html">سياسة الخصوصية</a></p>
+</footer>
+
+<script src="vendor/pdf.min.js"></script>
+<script src="vendor/tesseract/tesseract.min.js"></script>
+<script src="vendor/docx.iife.js"></script>
+<script src="js/ocr-to-word.js"></script>
+<script>OcrToWord.init({"badType": "الرجاء اختيار ملف PDF أو صورة.", "loading": "تحميل محرّك القراءة…", "reading": "قراءة الصفحة {n} من {total}… {pct}%", "done": "تم: قُرئت {pages} صفحة. راجع النص ثم نزّل الملف.", "limit": "قُرئت أول {max} صفحة فقط.", "noText": "لم يُعثر على نص. تحقق من اللغة أو جرّب مسحاً أوضح.", "password": "هذا الملف محمي بكلمة سر ولا يمكن قراءته.", "failed": "عذراً، تعذّرت قراءة هذا الملف.", "copied": "تم النسخ.", "copyFailed": "تعذّر النسخ: حدّد النص يدوياً."});</script>
+</body>
+</html>

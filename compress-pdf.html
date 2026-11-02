@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compress PDF to 200 KB, 100 KB or any size – free, no upload</title>
+<meta name="description" content="Reduce a PDF under the size limit of a visa, job or university form: 200 KB, 100 KB, 500 KB or the size you type. Works in your browser; the file is never uploaded.">
+<link rel="alternate" hreflang="en" href="compress-pdf.html">
+<link rel="alternate" hreflang="fr" href="compress-pdf-fr.html">
+<link rel="alternate" hreflang="ar" href="compress-pdf-ar.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="brand" href="index.html">M.HPDFTOOL</a>
+  <nav>
+    <a href="index.html">All tools</a>
+    <a href="compress-pdf-fr.html" lang="fr">Français</a>
+    <a href="compress-pdf-ar.html" lang="ar">العربية</a>
+  </nav>
+</header>
+<main>
+  <h1>Compress a PDF under a size in KB</h1>
+  <p class="lead">Shrink a PDF below the limit an online form asks for. Your file stays on your device.</p>
+
+  <div class="card">
+    <label class="drop" id="drop">
+      <input type="file" id="file" accept="application/pdf">
+      Click to choose a PDF, or drop it here
+    </label>
+    <div class="row">
+      <label for="target">Maximum size (KB)</label>
+      <input type="number" id="target" value="200" min="20" max="20000" dir="ltr">
+      <button type="button" class="chip" data-kb="100">100</button>
+      <button type="button" class="chip" data-kb="200">200</button>
+      <button type="button" class="chip" data-kb="500">500</button>
+    </div>
+    <div class="row"><button id="go" disabled>Compress</button></div>
+    <p id="status" aria-live="polite"></p>
+    <div id="results" style="display:block"></div>
+    <p class="note">Pages are saved as images, so text in the result can no longer be selected or searched. This suits scans, certificates and forms.</p>
+  </div>
+
+  <!-- AD SLOT: paste your AdSense ad unit code here after approval -->
+  <div class="ad-slot"></div>
+
+  <h2>How to compress a PDF to 200 KB</h2>
+  <ol>
+    <li>Choose your PDF or drop it into the box above.</li>
+    <li>Type the maximum size the form allows, or tap 100, 200 or 500 KB.</li>
+    <li>Click Compress and wait while the pages are processed.</li>
+    <li>Download the smaller PDF and check that it is still readable before you upload it.</li>
+  </ol>
+
+  <h2>Why forms ask for small PDFs</h2>
+  <p>Visa portals, university registration sites and job application forms often refuse files above 200 KB or 500 KB. A scan made with a phone is usually several megabytes, so it has to be reduced first.</p>
+  <h2>How the tool reaches the size</h2>
+  <p>It redraws each page as a JPEG image and tries several levels of sharpness. It keeps the sharpest version that fits under your limit, so the result is as readable as the size allows.</p>
+  <h2>What if the result is hard to read?</h2>
+  <p>A long document cannot always fit in a very small size. Try a larger limit if the form allows it, or split the document and upload only the pages that are required.</p>
+  <h2>Is it safe?</h2>
+  <p>Yes. The compression happens inside your browser. Your passport, diploma or bank statement is not sent to any server.</p>
+</main>
+<footer>
+  <p>© M.HPDFTOOL · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy policy</a></p>
+</footer>
+
+<script src="vendor/pdf.min.js"></script>
+<script src="vendor/jspdf.umd.min.js"></script>
+<script src="js/compress-pdf.js"></script>
+<script>CompressPdf.init({"notPdf": "Please choose a PDF file.", "minSize": "Enter a size of at least 20 KB.", "alreadySmall": "This PDF is already {size}, under your limit. Nothing to do.", "analysing": "Analysing page {n} of {total}…", "building": "Building the PDF: page {n} of {total}…", "download": "Download the compressed PDF", "done": "Done: {from} → {to} ({pages} page(s)).", "tooSmall": "This PDF cannot be made that small. The smallest possible is about {size}.", "password": "This PDF is password-protected and cannot be compressed.", "unreadable": "Sorry, this file could not be read as a PDF."});</script>
+</body>
+</html>

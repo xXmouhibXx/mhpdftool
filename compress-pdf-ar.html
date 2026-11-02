@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ضغط ملف PDF إلى 200 كيلوبايت أو 100 كيلوبايت أو أي حجم – مجاناً ودون رفع</title>
+<meta name="description" content="صغّر حجم ملف PDF ليصبح أقل من الحد المطلوب في استمارة التأشيرة أو التسجيل الجامعي أو طلب الوظيفة: 200 أو 100 أو 500 كيلوبايت أو الحجم الذي تكتبه. الملف يبقى على جهازك.">
+<link rel="alternate" hreflang="en" href="compress-pdf.html">
+<link rel="alternate" hreflang="fr" href="compress-pdf-fr.html">
+<link rel="alternate" hreflang="ar" href="compress-pdf-ar.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="brand" href="index.html">M.HPDFTOOL</a>
+  <nav>
+    <a href="index.html">كل الأدوات</a>
+    <a href="compress-pdf.html" lang="en">English</a>
+    <a href="compress-pdf-fr.html" lang="fr">Français</a>
+  </nav>
+</header>
+<main>
+  <h1>ضغط ملف PDF إلى حجم محدد بالكيلوبايت</h1>
+  <p class="lead">صغّر ملف PDF ليصبح أقل من الحد الذي تطلبه الاستمارة الإلكترونية. ملفك يبقى على جهازك.</p>
+
+  <div class="card">
+    <label class="drop" id="drop">
+      <input type="file" id="file" accept="application/pdf">
+      اضغط لاختيار ملف PDF أو اسحبه إلى هنا
+    </label>
+    <div class="row">
+      <label for="target">الحجم الأقصى (KB)</label>
+      <input type="number" id="target" value="200" min="20" max="20000" dir="ltr">
+      <button type="button" class="chip" data-kb="100">100</button>
+      <button type="button" class="chip" data-kb="200">200</button>
+      <button type="button" class="chip" data-kb="500">500</button>
+    </div>
+    <div class="row"><button id="go" disabled>اضغط الملف</button></div>
+    <p id="status" aria-live="polite"></p>
+    <div id="results" style="display:block"></div>
+    <p class="note">تُحفظ الصفحات كصور، لذلك لا يمكن تحديد النص أو البحث فيه في الملف الناتج. هذا مناسب للوثائق الممسوحة والشهادات والاستمارات.</p>
+  </div>
+
+  <!-- AD SLOT: paste your AdSense ad unit code here after approval -->
+  <div class="ad-slot"></div>
+
+  <h2>كيف تضغط ملف PDF إلى 200 كيلوبايت</h2>
+  <ol>
+    <li>اختر ملف PDF أو اسحبه إلى المربع أعلاه.</li>
+    <li>اكتب الحجم الأقصى الذي تقبله الاستمارة، أو اضغط على 100 أو 200 أو 500.</li>
+    <li>اضغط على «اضغط الملف» وانتظر معالجة الصفحات.</li>
+    <li>نزّل الملف المصغّر وتأكد من أنه ما زال مقروءاً قبل رفعه.</li>
+  </ol>
+
+  <h2>لماذا تطلب الاستمارات ملفات صغيرة؟</h2>
+  <p>مواقع التأشيرات والتسجيل الجامعي وطلبات الوظائف ترفض غالباً الملفات التي تتجاوز 200 أو 500 كيلوبايت. والوثيقة الممسوحة بالهاتف يكون حجمها عادة عدة ميغابايت، فلا بد من تصغيرها أولاً.</p>
+  <h2>كيف تصل الأداة إلى الحجم المطلوب؟</h2>
+  <p>تعيد رسم كل صفحة كصورة JPEG وتجرّب عدة مستويات من الوضوح، ثم تحتفظ بأوضح نسخة يكون حجمها أقل من الحد الذي كتبته.</p>
+  <h2>ماذا لو كانت النتيجة صعبة القراءة؟</h2>
+  <p>الوثيقة الطويلة لا يمكن دائماً أن تدخل في حجم صغير جداً. جرّب حداً أكبر إن كانت الاستمارة تقبله، أو ارفع الصفحات المطلوبة فقط.</p>
+  <h2>هل الأداة آمنة؟</h2>
+  <p>نعم. الضغط يتم داخل متصفحك. جواز سفرك أو شهادتك أو كشف حسابك لا يُرسل إلى أي خادم.</p>
+</main>
+<footer>
+  <p>© M.HPDFTOOL · <a href="about.html">من نحن</a> · <a href="contact.html">اتصل بنا</a> · <a href="privacy.html">سياسة الخصوصية</a></p>
+</footer>
+
+<script src="vendor/pdf.min.js"></script>
+<script src="vendor/jspdf.umd.min.js"></script>
+<script src="js/compress-pdf.js"></script>
+<script>CompressPdf.init({"notPdf": "الرجاء اختيار ملف PDF.", "minSize": "اكتب حجماً لا يقل عن 20 كيلوبايت.", "alreadySmall": "حجم هذا الملف {size} وهو أقل من الحد المطلوب. لا حاجة إلى الضغط.", "analysing": "تحليل الصفحة {n} من {total}…", "building": "إنشاء الملف: الصفحة {n} من {total}…", "download": "تنزيل الملف المضغوط", "done": "تم: {from} ← {to} (عدد الصفحات: {pages}).", "tooSmall": "لا يمكن تصغير هذا الملف إلى هذا الحجم. أصغر حجم ممكن هو تقريباً {size}.", "password": "هذا الملف محمي بكلمة سر ولا يمكن ضغطه.", "unreadable": "عذراً، تعذّرت قراءة هذا الملف."});</script>
+</body>
+</html>
